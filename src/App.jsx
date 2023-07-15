@@ -1,7 +1,16 @@
-function App() {
+import { Route, Routes } from "react-router-dom"
+import NavBar from "./components/NavBar"
+import Books from "./components/Books"
+import Categorires from "./components/Categories"
+
+const App = () => {
   return (
     <>
-      <h1>React App</h1>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Books />} />
+        <Route path="/Categories" element={<Categorires />} />
+      </Routes>
     </>
   )
 }

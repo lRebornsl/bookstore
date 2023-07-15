@@ -49,7 +49,9 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Show main page**
+- **Show book information**
+- **Navigate between pages**
+- **Form to add a new book**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -112,8 +114,8 @@ Example command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Make a better UI.**
-- [ ] **Build new sections.**
+- [ ] **Make a better UI**
+- [ ] **Build Categories section**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
