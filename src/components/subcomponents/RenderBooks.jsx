@@ -14,7 +14,7 @@ const RenderBooks = () => {
         <div className="flex pt-4">
           <button className="mr-4 text-cyan-blue">Comments</button>
           <hr className="border border-platinum h-auto"></hr>
-          <button className="mx-4 text-cyan-blue" onClick={(e) => handleRemove(e, index)}>Remove</button>
+          <button className="mx-4 text-cyan-blue">Remove</button>
           <hr className="border border-platinum h-auto"></hr>
           <button className="ml-4 text-cyan-blue">Edit</button>
         </div>
