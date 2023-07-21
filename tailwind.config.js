@@ -14,6 +14,9 @@ export default {
         'cyan-blue' : '#4386bf',
         'taupe-gray' : '#888888',
       },
+      fontFamily: {
+        'roboto': ['Roboto Slab', 'serif']
+      },
     },
   },
   plugins: [],
