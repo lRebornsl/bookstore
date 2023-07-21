@@ -1,65 +1,56 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const baseUrl = "https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/kiIywoxSHKVwOu879Zoi/books/";
 
 const initialState = {
-  bookList: [
-    {
-      "item_id": "item0",
-      "title": "The Great Gatsby",
-      "author": "John Smith",
-      "category": "Fiction"
-    },
-    {
-      "item_id": "item1",
-      "title": "Anna Karenina",
-      "author": "Leo Tolstoy",
-      "category": "Fiction"
-    },
-    {
-      "item_id": "item2",
-      "title": "The Selfish Gene",
-      "author": "Richard Dawkins",
-      "category": "Nonfiction"
-    }
-  ],
+  bookList: {},
 };
 
-export const booksSlice = createSlice({
+export const getBooks = createAsyncThunk("books/getBooks", () => {
+  return axios.get(baseUrl)
+    .then(response => response.data)
+})
+
+export const postBooks = createAsyncThunk("books/postBooks", ({id, title, author, category}) => {
+  return axios.post(baseUrl, {
+    "item_id": id,
+    "title": title,
+    "author": author,
+    "category": category,
+  })
+    .then(response => response.data)
+})
+
+export const deleteBooks = createAsyncThunk("books/deleteBooks", ({id}) => {
+  return axios.delete(baseUrl + id)
+    .then(response => response.data)
+});
+
+const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {
-    add: (state, action) => {
-      const {title, author} = action.payload;
-      const newId = "item" + (state.bookList.length);
-      const newBook = {
-        item_id: newId,
-        title: title,
-        author: author,
-        category: 'Undefined',
-      }
-      return{
-        ...state,
-        bookList: [...state.bookList, newBook]
-      }
+  reducers: {},
+  extraReducers: {
+    [getBooks.fulfilled]: (state, action) => {
+      state.bookList = action.payload;
     },
-    remove: (state, action) => {
-      const id = "item" + action.payload;
-      const updatedList = state.bookList.filter((book) => {
-        return book.item_id !== id;
+    [postBooks.fulfilled]: (state) => {
+      return state;
+    },
+    [deleteBooks.fulfilled]: (state, action) => {
+      const deletedItemId = action.meta.arg.id;
+      const updatedList = {};
+
+      Object.keys(state.bookList).forEach((itemId) => {
+        if (itemId !== deletedItemId) {
+          updatedList[itemId] = state.bookList[itemId];
+        }
       });
-      const returnList = updatedList.map((book, index) => {
-        return {
-          ...book,
-          item_id: "item" + index
-        };
-      });
-      return {
-        ...state,
-        bookList: returnList,
-      };
+
+      state.bookList = updatedList;
     }
   }
 })
-
-export const { add, remove } = booksSlice.actions;
 
 export default booksSlice.reducer;
