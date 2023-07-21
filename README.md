@@ -116,7 +116,6 @@ Example command:
 ## 🔭 Future Features <a name="future-features"></a>
 
 - [ ] **Build Categories section**
-- [ ] **Improve UI**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
