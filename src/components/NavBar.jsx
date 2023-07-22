@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 
 const NavBar = () => (
   <header className="border-b border-b-platinum">
-    <nav className="container mx-auto flex justify-between py-8">
+    <nav className="container mx-auto lg:px-14 flex justify-between py-8">
       <div className="flex justify-center items-center">
         <h1 className="font-bold text-3xl text-azure">Bookstore CMS</h1>
         <ul className="flex">
